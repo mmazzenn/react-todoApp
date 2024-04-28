@@ -7,10 +7,11 @@ import { TasksContext } from "../../Context/TasksContext";
 const TodoList = () => {
   const inputRef = useRef();
   const [posts, setPosts] = useState(null);
+  const [allTasks, setAllTasks] = useState(null);
   const [error, setError] = useState(null);
   const [loading, isLoading] = useState(false);
   const [showCompleted, setShowCompleted] = useState(true);
-  const { finishTasks, setFinishTasks } = useContext(TasksContext);
+  const { finishTasks } = useContext(TasksContext);
 
   async function fetchData() {
     try {
@@ -20,8 +21,6 @@ const TodoList = () => {
       );
       setPosts(response.data);
       isLoading(false);
-      setShowCompleted(true);
-      setFinishTasks([]);
     } catch (error) {
       setError(error);
       isLoading(false);
@@ -33,12 +32,17 @@ const TodoList = () => {
       { id: prevPosts.length + 1, title: task },
     ]);
   }
+  function getAllTasks() {
+    setShowCompleted(true);
+    setPosts(allTasks);
+  }
 
   function getCompletedTasks() {
     if (finishTasks && finishTasks.length > 0) {
       const completedTasks = posts.filter((post) =>
         finishTasks.includes(post.id)
       );
+      setAllTasks(posts);
       setPosts(completedTasks);
       setShowCompleted(false);
     }
@@ -79,7 +83,7 @@ const TodoList = () => {
 
       {posts && posts.length > 0 && showCompleted === false ? (
         <div className="text-center">
-          <button className="btn btn-info mb-4" onClick={() => fetchData()}>
+          <button className="btn btn-info mb-4" onClick={() => getAllTasks()}>
             Get All Tasks
           </button>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import style from "./TodoItem.module.css";
 import { TasksContext } from "../../Context/TasksContext";
 
@@ -37,7 +37,12 @@ const TodoItem = (props) => {
             </button>
           )}
           <button
-            onClick={() => removeTask(task.id)}
+            onClick={() => {
+              removeTask(task.id);
+              setFinishTasks((prevFinishTasks) =>
+                prevFinishTasks.filter((taskId) => taskId !== task.id)
+              );
+            }}
             className={`btn btn-danger ${style.itemBtn} rounded-circle`}
           >
             <i className="fa-solid fa-xmark text-white"></i>
