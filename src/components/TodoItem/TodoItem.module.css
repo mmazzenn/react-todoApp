@@ -1,0 +1,8 @@
+.itemBtn {
+  width: 30px;
+  height: 30px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}

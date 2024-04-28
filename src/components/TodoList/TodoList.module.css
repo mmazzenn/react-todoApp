@@ -1,0 +1,9 @@
+.todoList {
+  background-color: #3C5B6F;
+}
+
+.addTaskBtn {
+  border-radius: 0 !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+}
