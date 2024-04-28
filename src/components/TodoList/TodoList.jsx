@@ -1,13 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import style from "./TodoList.module.css";
 import axios from "axios";
+import { TasksContext } from "../../Context/TasksContext";
 
 const TodoList = () => {
   const inputRef = useRef();
   const [posts, setPosts] = useState(null);
   const [error, setError] = useState(null);
   const [loading, isLoading] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(true);
+  const { finishTasks, setFinishTasks } = useContext(TasksContext);
 
   async function fetchData() {
     try {
@@ -17,6 +20,8 @@ const TodoList = () => {
       );
       setPosts(response.data);
       isLoading(false);
+      setShowCompleted(true);
+      setFinishTasks([]);
     } catch (error) {
       setError(error);
       isLoading(false);
@@ -27,6 +32,16 @@ const TodoList = () => {
       ...prevPosts,
       { id: prevPosts.length + 1, title: task },
     ]);
+  }
+
+  function getCompletedTasks() {
+    if (finishTasks && finishTasks.length > 0) {
+      const completedTasks = posts.filter((post) =>
+        finishTasks.includes(post.id)
+      );
+      setPosts(completedTasks);
+      setShowCompleted(false);
+    }
   }
 
   useEffect(() => {
@@ -54,6 +69,21 @@ const TodoList = () => {
           Add Task
         </button>
       </div>
+      {finishTasks && finishTasks.length > 0 && showCompleted === true ? (
+        <div className="text-center">
+          <button className="btn btn-info mb-4" onClick={getCompletedTasks}>
+            Get Completed Tasks
+          </button>
+        </div>
+      ) : null}
+
+      {posts && posts.length > 0 && showCompleted === false ? (
+        <div className="text-center">
+          <button className="btn btn-info mb-4" onClick={() => fetchData()}>
+            Get All Tasks
+          </button>
+        </div>
+      ) : null}
       {loading ? (
         <p className="alert alert-success">Loading...</p>
       ) : error ? (

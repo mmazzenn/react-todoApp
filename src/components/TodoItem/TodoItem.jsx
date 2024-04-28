@@ -1,9 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "./TodoItem.module.css";
+import { TasksContext } from "../../Context/TasksContext";
 
 const TodoItem = (props) => {
   const [completed, isCompleted] = useState(false);
   const [task, setTask] = useState({ id: props.id, title: props.title });
+  const { finishTasks, setFinishTasks } = useContext(TasksContext);
+
+  function storeCompletedTasks(id) {
+    isCompleted(true);
+    setFinishTasks([...finishTasks, id]);
+  }
+
+  function removeTask(id) {
+    setTask(null);
+    const newTasks = finishTasks.filter((task) => task !== id);
+    setFinishTasks(newTasks);
+  }
 
   return (
     task && (
@@ -17,14 +30,14 @@ const TodoItem = (props) => {
             <h5 className="mb-0 bg-success rounded-3 p-2">Completed</h5>
           ) : (
             <button
-              onClick={() => isCompleted(true)}
+              onClick={() => storeCompletedTasks(task.id)}
               className={`btn btn-info ${style.itemBtn} rounded-circle`}
             >
               <i className="fa-solid fa-check text-white"></i>
             </button>
           )}
           <button
-            onClick={() => setTask(null)}
+            onClick={() => removeTask(task.id)}
             className={`btn btn-danger ${style.itemBtn} rounded-circle`}
           >
             <i className="fa-solid fa-xmark text-white"></i>
