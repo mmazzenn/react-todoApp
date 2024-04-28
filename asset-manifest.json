@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-todoApp/static/css/main.13d1eef9.css",
-    "main.js": "/react-todoApp/static/js/main.3e6213da.js",
+    "main.js": "/react-todoApp/static/js/main.7f5ca4bf.js",
     "static/js/453.59bb3b6d.chunk.js": "/react-todoApp/static/js/453.59bb3b6d.chunk.js",
     "static/media/fa-solid-900.ttf": "/react-todoApp/static/media/fa-solid-900.bacd5de623fb563b961a.ttf",
     "static/media/fa-brands-400.ttf": "/react-todoApp/static/media/fa-brands-400.60127e352b7a11f7f1bc.ttf",
@@ -13,11 +13,11 @@
     "static/media/fa-v4compatibility.woff2": "/react-todoApp/static/media/fa-v4compatibility.cf7f5903d06b79ad60f1.woff2",
     "index.html": "/react-todoApp/index.html",
     "main.13d1eef9.css.map": "/react-todoApp/static/css/main.13d1eef9.css.map",
-    "main.3e6213da.js.map": "/react-todoApp/static/js/main.3e6213da.js.map",
+    "main.7f5ca4bf.js.map": "/react-todoApp/static/js/main.7f5ca4bf.js.map",
     "453.59bb3b6d.chunk.js.map": "/react-todoApp/static/js/453.59bb3b6d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.13d1eef9.css",
-    "static/js/main.3e6213da.js"
+    "static/js/main.7f5ca4bf.js"
   ]
 }
